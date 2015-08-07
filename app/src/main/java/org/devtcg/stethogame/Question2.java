@@ -10,11 +10,9 @@ import android.widget.Button;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class Question2 extends Fragment {
-  @Bind(R.id.answer_btn)
-  Button mAnswerBtn;
-
   @Nullable
   @Override
   public View onCreateView(
@@ -23,16 +21,11 @@ public class Question2 extends Fragment {
       Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.question_2, container, false);
     ButterKnife.bind(this, view);
-
-    mAnswerBtn.setOnClickListener(mAnswerClicked);
-
     return view;
   }
 
-  private final View.OnClickListener mAnswerClicked = new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-      Achievements.unlock(getActivity(), Achievements.QUESTION_2);
-    }
-  };
+  @OnClick(R.id.answer_btn)
+  public void onAnswerClicked(Button answerBtn) {
+    Achievements.unlock(getActivity(), Achievements.QUESTION_2);
+  }
 }
