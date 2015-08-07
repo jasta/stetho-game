@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
   @Bind(R.id.pager) ViewPager mPager;
   QuestionsAdapter mQuestionsAdapter;
 
-  @Bind(R.id.question_title) TextView mQuestionTitle;
+  @Bind(R.id.question_status) TextView mQuestionStatus;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     public void onChange(@Achievements.Achievement int achievementId, boolean state) {
       QuestionInfo info = mQuestionsAdapter.getQuestionInfo(mPager.getCurrentItem());
       if (achievementId == info.achievementId) {
-        updateQuestionTitle(info.displayName, state);
+        updateQuestionInfo(info.displayName, state);
       }
     }
   };
@@ -68,14 +68,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onPageSelected(int position) {
       QuestionInfo info = mQuestionsAdapter.getQuestionInfo(position);
-      updateQuestionTitle(
+      updateQuestionInfo(
           info.displayName,
           Achievements.isUnlocked(info.achievementId));
     }
   };
 
-  private void updateQuestionTitle(String displayName, boolean state) {
-    mQuestionTitle.setText("[" + state + "] " + displayName);
+  private void updateQuestionInfo(String displayName, boolean state) {
+    setTitle(displayName);
+    mQuestionStatus.setText("unlocked=" + state);
   }
 
   private static class QuestionsAdapter extends FragmentStatePagerAdapter {
