@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,7 +21,9 @@ public class MainActivity extends AppCompatActivity {
       };
 
   @Bind(R.id.pager) ViewPager mPager;
-  PagerAdapter mPagerAdapter;
+  QuestionsAdapter mQuestionsAdapter;
+
+  @Bind(R.id.question_title) TextView mQuestionTitle;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +32,47 @@ public class MainActivity extends AppCompatActivity {
 
     ButterKnife.bind(this);
 
-    mPagerAdapter = new QuestionsAdapter(
+    mQuestionsAdapter = new QuestionsAdapter(
         this,
         getSupportFragmentManager(),
         QUESTIONS_FRAGMENTS);
-    mPager.setAdapter(mPagerAdapter);
+    mPager.setAdapter(mQuestionsAdapter);
+    mPager.addOnPageChangeListener(mPageChanged);
+    mPageChanged.onPageSelected(0); // hack :(
+
+    Achievements.registerListener(mAchievementListener);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    Achievements.unregisterListener(mAchievementListener);
+  }
+
+  private final Achievements.AchievementListener mAchievementListener =
+      new Achievements.AchievementListener() {
+    @Override
+    public void onChange(@Achievements.Achievement int achievementId, boolean state) {
+      QuestionInfo info = mQuestionsAdapter.getQuestionInfo(mPager.getCurrentItem());
+      if (achievementId == info.achievementId) {
+        updateQuestionTitle(info.displayName, state);
+      }
+    }
+  };
+
+  private final ViewPager.SimpleOnPageChangeListener mPageChanged =
+      new ViewPager.SimpleOnPageChangeListener() {
+    @Override
+    public void onPageSelected(int position) {
+      QuestionInfo info = mQuestionsAdapter.getQuestionInfo(position);
+      updateQuestionTitle(
+          info.displayName,
+          Achievements.isUnlocked(info.achievementId));
+    }
+  };
+
+  private void updateQuestionTitle(String displayName, boolean state) {
+    mQuestionTitle.setText("[" + state + "] " + displayName);
   }
 
   private static class QuestionsAdapter extends FragmentStatePagerAdapter {
@@ -60,6 +98,11 @@ public class MainActivity extends AppCompatActivity {
         mFragments[position] = fragment;
       }
       return fragment;
+    }
+
+    public QuestionInfo getQuestionInfo(int position) {
+      Fragment fragment = getItem(position);
+      return ((QuestionInfoProvider)fragment).getQuestionInfo();
     }
 
     private static Fragment createFragment(Class<? extends Fragment> clazz) {

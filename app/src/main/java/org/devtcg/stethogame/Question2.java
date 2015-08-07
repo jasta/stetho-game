@@ -8,11 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Question2 extends Fragment {
+public class Question2 extends Fragment implements QuestionInfoProvider {
+  private static final QuestionInfo INFO =
+      new QuestionInfo(
+          "2nd question",
+          Achievements.QUESTION_2);
+
   @Nullable
   @Override
   public View onCreateView(
@@ -26,6 +30,11 @@ public class Question2 extends Fragment {
 
   @OnClick(R.id.answer_btn)
   public void onAnswerClicked(Button answerBtn) {
-    Achievements.unlock(getActivity(), Achievements.QUESTION_2);
+    Achievements.unlock(getActivity(), INFO.achievementId);
+  }
+
+  @Override
+  public QuestionInfo getQuestionInfo() {
+    return INFO;
   }
 }
