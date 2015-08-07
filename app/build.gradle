@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
 }
 
 dependencies {
@@ -24,6 +28,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
 
     compile 'com.google.code.findbugs:jsr305:2.0.1'
+
+    compile 'com.jakewharton:butterknife:7.0.1'
 
     compile 'com.facebook.stetho:stetho:1.1.1'
     compile 'com.facebook.stetho:stetho-okhttp:1.1.1'

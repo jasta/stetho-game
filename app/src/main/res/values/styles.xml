@@ -5,4 +5,17 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="QuestionPrompt" parent="@android:style/TextAppearance.Medium">
+      <item name="android:layout_width">match_parent</item>
+      <item name="android:layout_height">wrap_content</item>
+      <item name="android:paddingLeft">15dp</item>
+      <item name="android:paddingRight">15dp</item>
+      <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="AnswerButton">
+      <item name="android:layout_width">@dimen/question_btn_width</item>
+      <item name="android:layout_height">@dimen/question_btn_height</item>
+    </style>
+
 </resources>

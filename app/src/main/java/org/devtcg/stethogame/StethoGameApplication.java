@@ -10,6 +10,7 @@ public class StethoGameApplication extends Application {
   public void onCreate() {
     super.onCreate();
 
+    // ...let the fun begin :)
     Context context = this;
     Stetho.initialize(Stetho.newInitializerBuilder(context)
         .enableDumpapp(Stetho.defaultDumperPluginsProvider(context))
