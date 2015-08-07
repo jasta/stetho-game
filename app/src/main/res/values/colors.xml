@@ -1,0 +1,8 @@
+<resources>
+
+  <color name="primary_btn_background">#14ffffff</color>
+  <color name="primary_btn_border">#42ffffff</color>
+  <color name="secondary_btn_background">#19ffffff</color>
+  <color name="secondary_btn_border">#42ffffff</color>
+
+</resources>
