@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
       new Class[] {
           Question1.class,
           Question2.class,
-          QuestionListView.class
+          QuestionListView.class,
+          ImageTypeQuestion.class
       };
 
   @Bind(R.id.pager) ViewPager mPager;
