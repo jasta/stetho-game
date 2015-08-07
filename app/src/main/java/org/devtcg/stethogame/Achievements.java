@@ -8,11 +8,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class Achievements {
-  @IntDef({ QUESTION_1, QUESTION_2 })
+  @IntDef({ QUESTION_1, QUESTION_2, QUESTION_3 })
   public @interface Achievement {}
 
   public static final int QUESTION_1 = 1;
   public static final int QUESTION_2 = 2;
+  public static final int QUESTION_3 = 3;
 
   private static final State sState = new State();
 
