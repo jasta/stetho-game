@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class StethoGameApplication extends Application {
 
-  public static final boolean USE_GOOGLE_PLAY = false;
+  public static final boolean USE_GOOGLE_PLAY = true;
 
   private static OkHttpClient client;
 

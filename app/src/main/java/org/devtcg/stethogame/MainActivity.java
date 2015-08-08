@@ -61,8 +61,13 @@ public class MainActivity extends AppCompatActivity {
 
   private void setupUI() {
     setContentView(R.layout.activity_main);
-
     ButterKnife.bind(this);
+
+    if (StethoGameApplication.USE_GOOGLE_PLAY) {
+      Games.setViewForPopups(
+          GoogleApiClientInstance.get(this),
+          findViewById(android.R.id.content));
+    }
 
     mQuestionsAdapter = new QuestionsAdapter(
         this,

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,6 +19,8 @@ import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity
     implements GameHelper.GameHelperListener {
+  private static final String TAG = "LoginActivity";
+
   private GameHelper mGameHelper;
 
   public static void show(Activity context) {
@@ -86,6 +89,7 @@ public class LoginActivity extends AppCompatActivity
     result.setResultCallback(new ResultCallback<Achievements.LoadAchievementsResult>() {
       @Override
       public void onResult(Achievements.LoadAchievementsResult result) {
+        Log.i(TAG, "Syncing state from Google Play...");
         org.devtcg.stethogame.Achievements.syncStateFromGooglePlay(
                 LoginActivity.this,
                 result.getAchievements());
