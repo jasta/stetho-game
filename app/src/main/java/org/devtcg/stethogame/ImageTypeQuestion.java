@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.MalformedInputException;
 import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
@@ -27,7 +26,7 @@ public class ImageTypeQuestion extends Fragment implements QuestionInfoProvider 
   private static final QuestionInfo INFO =
       new QuestionInfo(
           "4th question",
-          Achievements.QUESTION_4);
+          Achievements.QUESTION_IMAGE_TYPE);
 
   @Bind(R.id.imageView)
   ImageView mImageView;
@@ -41,7 +40,7 @@ public class ImageTypeQuestion extends Fragment implements QuestionInfoProvider 
       LayoutInflater inflater,
       ViewGroup container,
       Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.question_4, container, false);
+    View view = inflater.inflate(R.layout.image_type_question, container, false);
     ButterKnife.bind(this, view);
 
     try {
