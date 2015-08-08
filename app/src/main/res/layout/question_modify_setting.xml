@@ -1,0 +1,19 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+  <TextView
+      android:text="Modify the setting to win"
+      style="@style/QuestionPrompt"
+      />
+
+  <Button
+      android:id="@+id/answer_btn"
+      android:text="Open Settings"
+      style="@style/AnswerButton"
+      />
+
+</LinearLayout>

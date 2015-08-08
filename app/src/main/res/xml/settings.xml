@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="@string/pref_user_profile" >
+        <CheckBoxPreference
+            android:enabled="false"
+            android:defaultValue="false"
+            android:key="prefYouWin"
+            android:summary="If unlock the setting"
+            android:title="You win" >
+        </CheckBoxPreference>
+    </PreferenceCategory>
+</PreferenceScreen>

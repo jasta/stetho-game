@@ -15,7 +15,7 @@ import java.util.Map;
 public class Achievements {
   private static final String TAG = "Achievements";
 
-  @IntDef({ QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_IMAGE_TYPE, QUESTION_TOP_SCORE, QUESTION_NETWORK_PASSWORD })
+  @IntDef({ QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_IMAGE_TYPE, QUESTION_TOP_SCORE, QUESTION_NETWORK_PASSWORD, QUESTION_MODIFY_SETTING })
   public @interface Achievement {}
 
   public static final int QUESTION_1 = R.string.achievement_test_achivement;
@@ -24,6 +24,7 @@ public class Achievements {
   public static final int QUESTION_IMAGE_TYPE = 4;
   public static final int QUESTION_TOP_SCORE = 5;
   public static final int QUESTION_NETWORK_PASSWORD = 6;
+  public static final int QUESTION_MODIFY_SETTING = 7;
 
   private static final String PREFS_TAG = "Achievements";
 
