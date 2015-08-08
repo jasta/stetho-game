@@ -31,9 +31,14 @@ public class QuestionPoke extends Fragment implements QuestionInfoProvider {
     ButterKnife.bind(this, view);
     PokeManager.get().setListener(new PokeManager.PokeListener() {
       @Override
-      public void onPoke(String message) {
-        mPokeText.setText(message);
-        Achievements.unlock(getActivity(), INFO.achievement);
+      public void onPoke(final String message) {
+        getActivity().runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            mPokeText.setText(message);
+            Achievements.unlock(getActivity(), INFO.achievement);
+          }
+        });
       }
     });
     return view;

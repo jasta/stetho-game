@@ -21,7 +21,7 @@ public class PokeDumperPlugin implements DumperPlugin {
     @Override
     public void dump(DumperContext dumpContext) throws DumpException {
         Iterator<String> args = dumpContext.getArgsAsList().iterator();
-        String message = ArgsHelper.nextArg(args, "Usage: poke <message");
+        String message = ArgsHelper.nextArg(args, "Usage: poke <message>");
         PokeManager.get().poke(message);
         dumpContext.getStdout().println("Poke sent!");
     }
