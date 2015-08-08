@@ -32,7 +32,7 @@ import butterknife.OnClick;
 public class QuestionImageType extends Fragment implements QuestionInfoProvider {
   private static final QuestionInfo INFO =
       new QuestionInfo(
-          "5th question",
+          "Interesting Image Type",
           Achievements.Achievement.QUESTION_IMAGE_TYPE);
 
   @Bind(R.id.imageView)

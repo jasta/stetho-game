@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
   @Bind(R.id.pager) ViewPager mPager;
   QuestionsAdapter mQuestionsAdapter;
 
-  @Bind(R.id.question_status) TextView mQuestionStatus;
-
   public static void show(Activity context) {
     context.startActivity(new Intent(context, MainActivity.class));
   }
@@ -127,8 +125,11 @@ public class MainActivity extends AppCompatActivity {
   };
 
   private void updateQuestionInfo(String displayName, boolean state) {
+    if (state) {
+      displayName = "✓ " + displayName;
+    }
     setTitle(displayName);
-    mQuestionStatus.setText("unlocked=" + state);
+    //mQuestionStatus.setText("unlocked=" + state);
   }
 
   private static class QuestionsAdapter extends FragmentStatePagerAdapter {

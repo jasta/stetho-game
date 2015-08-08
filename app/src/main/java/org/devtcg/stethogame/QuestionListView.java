@@ -21,7 +21,7 @@ import butterknife.OnClick;
 public class QuestionListView extends Fragment implements QuestionInfoProvider {
   private static final QuestionInfo INFO =
       new QuestionInfo(
-          "3rd Question",
+          "What's the height?",
           Achievements.Achievement.QUESTION_LIST_ITEM_HEIGHT);
 
   @Bind(R.id.randomlist)
