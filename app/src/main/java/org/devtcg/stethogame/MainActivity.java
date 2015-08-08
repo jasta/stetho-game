@@ -45,11 +45,13 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    GoogleApiClient client = GoogleApiClientInstance.get(this);
-    if (client == null) {
-      LoginActivity.show(this);
-      finish();
-      return;
+    if (StethoGameApplication.USE_GOOGLE_PLAY) {
+      GoogleApiClient client = GoogleApiClientInstance.get(this);
+      if (client == null) {
+        LoginActivity.show(this);
+        finish();
+        return;
+      }
     }
 
     setupUI();

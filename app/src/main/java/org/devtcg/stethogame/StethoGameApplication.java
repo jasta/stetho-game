@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public class StethoGameApplication extends Application {
 
+  public static final boolean USE_GOOGLE_PLAY = false;
+
   private static OkHttpClient client;
 
   static {

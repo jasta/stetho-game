@@ -27,10 +27,14 @@ public class LoginActivity extends AppCompatActivity
 
     ButterKnife.bind(this);
 
-    mGameHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
-    mGameHelper.enableDebugLog(true);
-    mGameHelper.setup(this);
-    GoogleApiClientInstance.set(mGameHelper.getApiClient());
+    if (StethoGameApplication.USE_GOOGLE_PLAY) {
+      mGameHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
+      mGameHelper.enableDebugLog(true);
+      mGameHelper.setup(this);
+      GoogleApiClientInstance.set(mGameHelper.getApiClient());
+    } else {
+      onSignInSucceeded();
+    }
   }
 
   @Override
@@ -48,12 +52,16 @@ public class LoginActivity extends AppCompatActivity
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    mGameHelper.onActivityResult(requestCode, resultCode, data);
+    if (StethoGameApplication.USE_GOOGLE_PLAY) {
+      mGameHelper.onActivityResult(requestCode, resultCode, data);
+    }
   }
 
   @OnClick(R.id.sign_in)
   public void onSignInClicked(View v) {
-    mGameHelper.beginUserInitiatedSignIn();
+    if (StethoGameApplication.USE_GOOGLE_PLAY) {
+      mGameHelper.beginUserInitiatedSignIn();
+    }
   }
 
   @Override
@@ -68,5 +76,6 @@ public class LoginActivity extends AppCompatActivity
   @Override
   public void onSignInSucceeded() {
     MainActivity.show(this);
+    finish();
   }
 }

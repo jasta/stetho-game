@@ -68,9 +68,11 @@ public class Achievements {
   }
 
   public static void unlock(Context context, @Achievement int achievementId) {
-    Games.Achievements.unlock(
-        GoogleApiClientInstance.get(context),
-        context.getResources().getString(achievementId));
+    if (StethoGameApplication.USE_GOOGLE_PLAY) {
+      Games.Achievements.unlock(
+          GoogleApiClientInstance.get(context),
+          context.getResources().getString(achievementId));
+    }
     synchronized (sState) {
       sState.set(achievementId, true);
     }
