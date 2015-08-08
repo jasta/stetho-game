@@ -24,7 +24,7 @@ public class QuestionListView extends Fragment implements QuestionInfoProvider {
   private static final QuestionInfo INFO =
       new QuestionInfo(
           "3rd Question",
-          Achievements.QUESTION_3);
+          Achievements.Achievement.QUESTION_3);
 
   @Bind(R.id.randomlist)
   ListView listView;
@@ -58,7 +58,7 @@ public class QuestionListView extends Fragment implements QuestionInfoProvider {
       if (itemNum == 376) {
         View view = listView.getChildAt(i);
         if (view.getMeasuredHeight() == Integer.parseInt(answerTextView.getText().toString())) {
-          Achievements.unlock(getActivity(), Achievements.QUESTION_3);
+          Achievements.unlock(getActivity(), Achievements.Achievement.QUESTION_3);
         } else {
           break;
         }

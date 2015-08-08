@@ -9,17 +9,23 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.Games;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
   private static final String TAG = "MainActivity";
+
+  private static final int REQUEST_ACHIEVEMENTS = 1;
 
   @SuppressWarnings("unchecked")
   private static final Class<? extends Fragment>[] QUESTIONS_FRAGMENTS =
@@ -81,12 +87,33 @@ public class MainActivity extends AppCompatActivity {
     Achievements.unregisterListener(mAchievementListener);
   }
 
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.menu_main, menu);
+    return super.onCreateOptionsMenu(menu);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.action_achievements:
+        startActivityForResult(
+            Games.Achievements.getAchievementsIntent(
+                GoogleApiClientInstance.get(this)),
+            REQUEST_ACHIEVEMENTS);
+        return true;
+      default:
+        return super.onOptionsItemSelected(item);
+    }
+  }
+
   private final Achievements.AchievementListener mAchievementListener =
       new Achievements.AchievementListener() {
     @Override
-    public void onChange(@Achievements.Achievement int achievementId, boolean state) {
+    public void onChange(Achievements.Achievement achievement, boolean state) {
       QuestionInfo info = mQuestionsAdapter.getQuestionInfo(mPager.getCurrentItem());
-      if (achievementId == info.achievementId) {
+      if (achievement == info.achievement) {
         updateQuestionInfo(info.displayName, state);
       }
     }
@@ -99,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
       QuestionInfo info = mQuestionsAdapter.getQuestionInfo(position);
       updateQuestionInfo(
           info.displayName,
-          Achievements.isUnlocked(info.achievementId));
+          Achievements.isUnlocked(info.achievement));
     }
   };
 

@@ -33,7 +33,7 @@ public class ImageTypeQuestion extends Fragment implements QuestionInfoProvider 
   private static final QuestionInfo INFO =
       new QuestionInfo(
           "5th question",
-          Achievements.QUESTION_IMAGE_TYPE);
+          Achievements.Achievement.QUESTION_IMAGE_TYPE);
 
   @Bind(R.id.imageView)
   ImageView mImageView;
@@ -69,7 +69,7 @@ public class ImageTypeQuestion extends Fragment implements QuestionInfoProvider 
   @OnClick(R.id.answer_btn)
   public void onAnswerClicked(Button answerBtn) {
     if (mAnswer.getText().toString().equals("webp")) {
-      Achievements.unlock(getActivity(), INFO.achievementId);
+      Achievements.unlock(getActivity(), INFO.achievement);
     } else {
       Toast.makeText(getActivity(), "Incorrect answer.", Toast.LENGTH_SHORT).show();
     }

@@ -2,10 +2,10 @@ package org.devtcg.stethogame;
 
 public class QuestionInfo {
   public final String displayName;
-  public final int achievementId;
+  public final Achievements.Achievement achievement;
 
-  public QuestionInfo(String displayName, int achievementId) {
+  public QuestionInfo(String displayName, Achievements.Achievement achievement) {
     this.displayName = displayName;
-    this.achievementId = achievementId;
+    this.achievement = achievement;
   }
 }

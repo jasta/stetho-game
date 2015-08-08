@@ -2,30 +2,57 @@ package org.devtcg.stethogame;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.support.annotation.IntDef;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.widget.Toast;
 
 import com.google.android.gms.games.Games;
+import com.google.android.gms.games.achievement.Achievement;
+import com.google.android.gms.games.achievement.AchievementBuffer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Achievements {
   private static final String TAG = "Achievements";
 
-  @IntDef({ QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_IMAGE_TYPE, QUESTION_TOP_SCORE, QUESTION_NETWORK_PASSWORD, QUESTION_MODIFY_SETTING, QUESTION_DUMPAPP_LOGIN })
-  public @interface Achievement {}
+  public enum Achievement {
+    QUESTION_1(R.string.achievement_test_achivement),
+    QUESTION_2,
+    QUESTION_3,
+    QUESTION_IMAGE_TYPE,
+    QUESTION_TOP_SCORE,
+    QUESTION_NETWORK_PASSWORD,
+    QUESTION_MODIFY_SETTING,
+    QUESTION_DUMPAPP_LOGIN;
 
-  public static final int QUESTION_1 = R.string.achievement_test_achivement;
-  public static final int QUESTION_2 = 2;
-  public static final int QUESTION_3 = 3;
-  public static final int QUESTION_IMAGE_TYPE = 4;
-  public static final int QUESTION_TOP_SCORE = 5;
-  public static final int QUESTION_NETWORK_PASSWORD = 6;
-  public static final int QUESTION_MODIFY_SETTING = 7;
-  public static final int QUESTION_DUMPAPP_LOGIN = 8;
+    private final int mResId;
+
+    Achievement() {
+      // TODO: Remove me.
+      mResId = ordinal();
+    }
+
+    Achievement(int resId) {
+      mResId = resId;
+    }
+
+    public int getResId() {
+      return mResId;
+    }
+
+    public static Achievement fromResId(int resId) {
+      for (Achievement achievement : values()) {
+        if (achievement.getResId() == resId) {
+          return achievement;
+        }
+      }
+      throw new IllegalArgumentException("Unknown resId=" + resId);
+    }
+  }
 
   private static final String PREFS_TAG = "Achievements";
 
@@ -36,9 +63,9 @@ public class Achievements {
       SharedPreferences prefs = getPrefs(context);
       try {
         for (Map.Entry<String, ?> entry : prefs.getAll().entrySet()) {
-          @Achievement int achievementId = Integer.parseInt(entry.getKey());
+          int achievementId = Integer.parseInt(entry.getKey());
           boolean result = (Boolean)entry.getValue();
-          sState.set(achievementId, result);
+          sState.set(Achievement.fromResId(achievementId), result);
         }
       } catch (NumberFormatException | ClassCastException e) {
         Log.e(TAG, "Error syncing state from disk", e);
@@ -47,13 +74,35 @@ public class Achievements {
     }
   }
 
+  public static void syncStateFromGooglePlay(
+      Context context,
+      AchievementBuffer buffer) {
+    Resources res = context.getResources();
+    Map<String, Integer> playIdsToResIds = new HashMap<>();
+    for (Achievement achievement : Achievement.values()) {
+      int resId = achievement.getResId();
+      playIdsToResIds.put(res.getString(resId), resId);
+    }
+    SharedPreferences prefs = getPrefs(context);
+    SharedPreferences.Editor editor = prefs.edit();
+    for (com.google.android.gms.games.achievement.Achievement achievement : buffer) {
+      int resId = playIdsToResIds.get(achievement.getAchievementId());
+      boolean unlocked =
+          achievement.getState() ==
+              com.google.android.gms.games.achievement.Achievement.STATE_UNLOCKED;
+      sState.set(Achievement.fromResId(resId), unlocked);
+      editor.putBoolean(String.valueOf(resId), unlocked);
+    }
+    editor.apply();
+  }
+
   private static SharedPreferences getPrefs(Context context) {
     return context.getSharedPreferences(PREFS_TAG, Context.MODE_PRIVATE);
   }
 
-  public static boolean isUnlocked(@Achievement int achievementId) {
+  public static boolean isUnlocked(Achievement achievement) {
     synchronized (sState) {
-      return sState.get(achievementId);
+      return sState.get(achievement);
     }
   }
 
@@ -69,30 +118,30 @@ public class Achievements {
     }
   }
 
-  public static void unlock(Context context, @Achievement int achievementId) {
+  public static void unlock(Context context, Achievement achievement) {
     if (StethoGameApplication.USE_GOOGLE_PLAY) {
       Games.Achievements.unlock(
           GoogleApiClientInstance.get(context),
-          context.getResources().getString(achievementId));
+          context.getResources().getString(achievement.getResId()));
     }
     synchronized (sState) {
-      sState.set(achievementId, true);
+      sState.set(achievement, true);
     }
-    getPrefs(context).edit().putBoolean(String.valueOf(achievementId), true).apply();
+    getPrefs(context).edit().putBoolean(String.valueOf(achievement.getResId()), true).apply();
   }
 
   private static class State {
     private final SparseBooleanArray mCached = new SparseBooleanArray();
     private final ArrayList<AchievementListener> mListeners = new ArrayList<>();
 
-    public synchronized boolean get(@Achievement int achievementId) {
-      return mCached.get(achievementId);
+    public synchronized boolean get(Achievement achievementId) {
+      return mCached.get(achievementId.getResId());
     }
 
-    public synchronized void set(@Achievement int achievementId, boolean value) {
-      mCached.put(achievementId, value);
+    public synchronized void set(Achievement achievement, boolean value) {
+      mCached.put(achievement.getResId(), value);
       for (int i = 0, N = mListeners.size(); i < N; i++) {
-        mListeners.get(i).onChange(achievementId, value);
+        mListeners.get(i).onChange(achievement, value);
       }
     }
 
@@ -106,6 +155,6 @@ public class Achievements {
   }
 
   public interface AchievementListener {
-    void onChange(@Achievement int achievementId, boolean state);
+    void onChange(Achievement achievement, boolean state);
   }
 }

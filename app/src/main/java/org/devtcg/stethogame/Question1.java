@@ -15,7 +15,7 @@ public class Question1 extends Fragment implements QuestionInfoProvider {
   private static final QuestionInfo INFO =
       new QuestionInfo(
           "1st question",
-          Achievements.QUESTION_1);
+          Achievements.Achievement.QUESTION_1);
 
   @Nullable
   @Override
@@ -30,7 +30,7 @@ public class Question1 extends Fragment implements QuestionInfoProvider {
 
   @OnClick(R.id.answer_btn)
   public void onAnswerClicked(Button answerBtn) {
-    Achievements.unlock(getActivity(), INFO.achievementId);
+    Achievements.unlock(getActivity(), INFO.achievement);
   }
 
   @Override

@@ -1,8 +1,10 @@
 <resources>
+
     <string name="app_name">StethoGame</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_achievements">Achievements</string>
 
     <string name="pref_send_report">Send crash reports</string>
     <string name="pref_send_report_summary">Helps to fix bugs</string>
@@ -13,6 +15,5 @@
 
     <string name="pref_user_profile">User Profile</string>
     <string name="pref_update_setting">Update Settings</string>
-
 
 </resources>

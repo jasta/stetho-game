@@ -27,7 +27,7 @@ public class QuestionTopScore extends Fragment implements QuestionInfoProvider {
   private static final QuestionInfo INFO =
       new QuestionInfo(
           "Get the top score",
-          Achievements.QUESTION_TOP_SCORE);
+          Achievements.Achievement.QUESTION_TOP_SCORE);
   private TopScoreDbHelper mDbHelper;
 
   @Bind(R.id.top_score_list)
@@ -86,7 +86,7 @@ public class QuestionTopScore extends Fragment implements QuestionInfoProvider {
     listView.setAdapter(new SimpleCursorAdapter(getActivity(), R.layout.top_score_list_item, c, columns, to));
     SQLiteCursor obj = (SQLiteCursor)listView.getAdapter().getItem(0);
     if (obj.getInt(1) > 1000) {
-      Achievements.unlock(getActivity(), INFO.achievementId);
+      Achievements.unlock(getActivity(), INFO.achievement);
     }
   }
 

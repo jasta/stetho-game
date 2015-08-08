@@ -24,7 +24,7 @@ public class QuestionNetworkPassword extends Fragment implements QuestionInfoPro
   private static final QuestionInfo INFO =
       new QuestionInfo(
           "Whats the password?",
-          Achievements.QUESTION_NETWORK_PASSWORD);
+          Achievements.Achievement.QUESTION_NETWORK_PASSWORD);
 
   @Bind(R.id.answer_text)
   EditText answerTextView;
@@ -64,7 +64,7 @@ public class QuestionNetworkPassword extends Fragment implements QuestionInfoPro
               }
 
               if (theResponse.body().string().equalsIgnoreCase(answerTextView.getText().toString())) {
-                Achievements.unlock(getActivity(), INFO.achievementId);
+                Achievements.unlock(getActivity(), INFO.achievement);
               } else {
                 Toast.makeText(getActivity(), "Invalid password", Toast.LENGTH_SHORT).show();
               }
