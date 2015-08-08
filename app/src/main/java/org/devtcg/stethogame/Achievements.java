@@ -15,14 +15,15 @@ import java.util.Map;
 public class Achievements {
   private static final String TAG = "Achievements";
 
-  @IntDef({ QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_TOP_SCORE, QUESTION_IMAGE_TYPE })
+  @IntDef({ QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_IMAGE_TYPE, QUESTION_TOP_SCORE, QUESTION_NETWORK_PASSWORD })
   public @interface Achievement {}
 
   public static final int QUESTION_1 = R.string.achievement_test_achivement;
   public static final int QUESTION_2 = 2;
   public static final int QUESTION_3 = 3;
-  public static final int QUESTION_TOP_SCORE = 4;
-  public static final int QUESTION_IMAGE_TYPE = 5;
+  public static final int QUESTION_IMAGE_TYPE = 4;
+  public static final int QUESTION_TOP_SCORE = 5;
+  public static final int QUESTION_NETWORK_PASSWORD = 6;
 
   private static final String PREFS_TAG = "Achievements";
 
