@@ -3,8 +3,6 @@ package org.devtcg.stethogame;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +22,7 @@ public class QuestionListView extends Fragment implements QuestionInfoProvider {
   private static final QuestionInfo INFO =
       new QuestionInfo(
           "3rd Question",
-          Achievements.Achievement.QUESTION_3);
+          Achievements.Achievement.QUESTION_LIST_ITEM_HEIGHT);
 
   @Bind(R.id.randomlist)
   ListView listView;
@@ -58,7 +56,7 @@ public class QuestionListView extends Fragment implements QuestionInfoProvider {
       if (itemNum == 376) {
         View view = listView.getChildAt(i);
         if (view.getMeasuredHeight() == Integer.parseInt(answerTextView.getText().toString())) {
-          Achievements.unlock(getActivity(), Achievements.Achievement.QUESTION_3);
+          Achievements.unlock(getActivity(), Achievements.Achievement.QUESTION_LIST_ITEM_HEIGHT);
         } else {
           break;
         }

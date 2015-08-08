@@ -12,9 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
@@ -30,10 +28,8 @@ public class MainActivity extends AppCompatActivity {
   @SuppressWarnings("unchecked")
   private static final Class<? extends Fragment>[] QUESTIONS_FRAGMENTS =
       new Class[] {
-          Question1.class,
-          Question2.class,
           QuestionListView.class,
-          ImageTypeQuestion.class,
+          QuestionImageType.class,
           QuestionTopScore.class,
           QuestionNetworkPassword.class,
           QuestionModifySetting.class,

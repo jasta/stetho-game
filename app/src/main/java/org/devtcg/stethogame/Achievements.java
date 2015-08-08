@@ -20,21 +20,14 @@ public class Achievements {
   private static final String TAG = "Achievements";
 
   public enum Achievement {
-    QUESTION_1(R.string.achievement_test_achivement),
-    QUESTION_2,
-    QUESTION_3,
-    QUESTION_IMAGE_TYPE,
-    QUESTION_TOP_SCORE,
-    QUESTION_NETWORK_PASSWORD,
-    QUESTION_MODIFY_SETTING,
-    QUESTION_DUMPAPP_LOGIN;
+    QUESTION_LIST_ITEM_HEIGHT(R.string.achievement_list_item_height),
+    QUESTION_IMAGE_TYPE(R.string.achievement_image_type),
+    QUESTION_TOP_SCORE(R.string.achievement_top_gun),
+    QUESTION_NETWORK_PASSWORD(R.string.achievement_steal_the_beacon),
+    QUESTION_MODIFY_SETTING(R.string.achievement_modify_settings),
+    QUESTION_DUMPAPP_LOGIN(R.string.achievement_login);
 
     private final int mResId;
-
-    Achievement() {
-      // TODO: Remove me.
-      mResId = ordinal();
-    }
 
     Achievement(int resId) {
       mResId = resId;

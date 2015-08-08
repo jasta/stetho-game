@@ -18,7 +18,7 @@ public class QuestionLoginDumpapp extends Fragment implements QuestionInfoProvid
   private static final QuestionInfo INFO =
       new QuestionInfo(
           "Login via Command Line",
-          Achievements.QUESTION_DUMPAPP_LOGIN);
+          Achievements.Achievement.QUESTION_DUMPAPP_LOGIN);
 
 
 @Bind(R.id.dumpapp_login_text)
@@ -45,7 +45,7 @@ public class QuestionLoginDumpapp extends Fragment implements QuestionInfoProvid
             @Override
             public void run() {
                 dumpAppLoginText.setText("Welcome "+yourName+"! You're logged in.");
-                Achievements.unlock(getActivity(), INFO.achievementId);
+                Achievements.unlock(getActivity(), INFO.achievement);
             }
         });
     }

@@ -5,5 +5,11 @@ Save this file as res/values/games-ids.xml in your project.
 -->
 <resources>
   <string name="app_id">848768530333</string>
-  <string name="achievement_test_achivement">CgkIne-v9NkYEAIQAA</string>
+  <string name="achievement_list_item_height">CgkIne-v9NkYEAIQAA</string>
+  <string name="achievement_image_type">CgkIne-v9NkYEAIQAw</string>
+  <string name="achievement_top_gun">CgkIne-v9NkYEAIQBA</string>
+  <string name="achievement_steal_the_beacon">CgkIne-v9NkYEAIQBQ</string>
+  <string name="achievement_modify_settings">CgkIne-v9NkYEAIQBg</string>
+  <string name="achievement_login">CgkIne-v9NkYEAIQBw</string>
+  <string name="achievement_crash">CgkIne-v9NkYEAIQCA</string>
 </resources>

@@ -19,7 +19,7 @@ public class QuestionModifySetting extends Fragment implements QuestionInfoProvi
   private static final QuestionInfo INFO =
       new QuestionInfo(
           "Modify this setting",
-          Achievements.QUESTION_MODIFY_SETTING);
+          Achievements.Achievement.QUESTION_MODIFY_SETTING);
     private static final int RESULT_SETTINGS = 1;
 
     @Nullable
@@ -61,7 +61,7 @@ public class QuestionModifySetting extends Fragment implements QuestionInfoProvi
                 .getDefaultSharedPreferences(getActivity());
 
         if (sharedPrefs.getBoolean("prefYouWin", false)) {
-            Achievements.unlock(getActivity(), INFO.achievementId);
+            Achievements.unlock(getActivity(), INFO.achievement);
         }
     }
 }
