@@ -1,18 +1,26 @@
 package org.devtcg.stethogame;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
+  private static final String TAG = "MainActivity";
+
   @SuppressWarnings("unchecked")
   private static final Class<? extends Fragment>[] QUESTIONS_FRAGMENTS =
       new Class[] {
@@ -28,9 +36,25 @@ public class MainActivity extends AppCompatActivity {
 
   @Bind(R.id.question_status) TextView mQuestionStatus;
 
+  public static void show(Activity context) {
+    context.startActivity(new Intent(context, MainActivity.class));
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    GoogleApiClient client = GoogleApiClientInstance.get(this);
+    if (client == null) {
+      LoginActivity.show(this);
+      finish();
+      return;
+    }
+
+    setupUI();
+  }
+
+  private void setupUI() {
     setContentView(R.layout.activity_main);
 
     ButterKnife.bind(this);

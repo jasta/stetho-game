@@ -1,23 +1,52 @@
 package org.devtcg.stethogame;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.IntDef;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.widget.Toast;
 
+import com.google.android.gms.games.Games;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Achievements {
+  private static final String TAG = "Achievements";
+
   @IntDef({ QUESTION_1, QUESTION_2, QUESTION_3, QUESTION_TOP_SCORE, QUESTION_IMAGE_TYPE })
   public @interface Achievement {}
 
-  public static final int QUESTION_1 = 1;
+  public static final int QUESTION_1 = R.string.achievement_test_achivement;
   public static final int QUESTION_2 = 2;
   public static final int QUESTION_3 = 3;
   public static final int QUESTION_TOP_SCORE = 4;
   public static final int QUESTION_IMAGE_TYPE = 5;
 
+  private static final String PREFS_TAG = "Achievements";
+
   private static final State sState = new State();
+
+  public static void syncStateFromDisk(Context context) {
+    synchronized (sState) {
+      SharedPreferences prefs = getPrefs(context);
+      try {
+        for (Map.Entry<String, ?> entry : prefs.getAll().entrySet()) {
+          @Achievement int achievementId = Integer.parseInt(entry.getKey());
+          boolean result = (Boolean)entry.getValue();
+          sState.set(achievementId, result);
+        }
+      } catch (NumberFormatException | ClassCastException e) {
+        Log.e(TAG, "Error syncing state from disk", e);
+        prefs.edit().clear().apply();
+      }
+    }
+  }
+
+  private static SharedPreferences getPrefs(Context context) {
+    return context.getSharedPreferences(PREFS_TAG, Context.MODE_PRIVATE);
+  }
 
   public static boolean isUnlocked(@Achievement int achievementId) {
     synchronized (sState) {
@@ -38,14 +67,13 @@ public class Achievements {
   }
 
   public static void unlock(Context context, @Achievement int achievementId) {
+    Games.Achievements.unlock(
+        GoogleApiClientInstance.get(context),
+        context.getResources().getString(achievementId));
     synchronized (sState) {
       sState.set(achievementId, true);
     }
-    Toast.makeText(
-        context,
-        "TODO: unlock "  + achievementId,
-        Toast.LENGTH_SHORT)
-        .show();
+    getPrefs(context).edit().putBoolean(String.valueOf(achievementId), true).apply();
   }
 
   private static class State {

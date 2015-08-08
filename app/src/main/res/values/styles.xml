@@ -7,6 +7,11 @@
     <item name="actionBarStyle">@style/AppActionBar</item>
   </style>
 
+  <style name="LoginTheme" parent="AppTheme">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
   <style name="AppActionBar" parent="@style/Widget.AppCompat.ActionBar">
     <item name="android:background">@android:color/transparent</item>
     <item name="background">@android:color/transparent</item>
