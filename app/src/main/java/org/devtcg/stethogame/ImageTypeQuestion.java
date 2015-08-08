@@ -14,6 +14,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp.StethoInterceptor;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
@@ -25,7 +32,7 @@ import butterknife.OnClick;
 public class ImageTypeQuestion extends Fragment implements QuestionInfoProvider {
   private static final QuestionInfo INFO =
       new QuestionInfo(
-          "4th question",
+          "5th question",
           Achievements.QUESTION_IMAGE_TYPE);
 
   @Bind(R.id.imageView)
@@ -71,8 +78,17 @@ public class ImageTypeQuestion extends Fragment implements QuestionInfoProvider 
   private class SetImageTask extends AsyncTask<Void, Integer, Bitmap> {
     @Override
     protected Bitmap doInBackground(Void... params) {
+      Request request = new Request.Builder().url("https://www.gstatic.com/webp/gallery/5.sm.webp").build();
+
+      Response response = null;
       try {
-        return (BitmapFactory.decodeStream(new URL("https://www.gstatic.com/webp/gallery/5.sm.webp").openConnection().getInputStream()));
+        response = StethoGameApplication.getClient().newCall(request).execute();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+
+      try {
+        return (BitmapFactory.decodeStream(response.body().byteStream()));
       } catch (IOException e) {
         e.printStackTrace();
       }
