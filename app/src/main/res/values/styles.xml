@@ -13,8 +13,8 @@
   </style>
 
   <style name="AppActionBar" parent="@style/Widget.AppCompat.ActionBar">
-    <item name="android:background">@android:color/transparent</item>
-    <item name="background">@android:color/transparent</item>
+    <item name="android:background">@drawable/action_bar_background</item>
+    <item name="background">@drawable/action_bar_background</item>
   </style>
 
   <style name="QuestionPrompt" parent="@android:style/TextAppearance.Large">

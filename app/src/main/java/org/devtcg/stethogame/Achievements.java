@@ -25,7 +25,8 @@ public class Achievements {
     QUESTION_TOP_SCORE(R.string.achievement_top_gun),
     QUESTION_NETWORK_PASSWORD(R.string.achievement_steal_the_beacon),
     QUESTION_MODIFY_SETTING(R.string.achievement_modify_settings),
-    QUESTION_DUMPAPP_LOGIN(R.string.achievement_login);
+    QUESTION_DUMPAPP_LOGIN(R.string.achievement_login),
+    CRASH(R.string.achievement_crash);
 
     private final int mResId;
 

@@ -10,6 +10,7 @@ import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class StethoGameApplication extends Application {
 
@@ -39,6 +40,25 @@ public class StethoGameApplication extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
+
+    final Thread.UncaughtExceptionHandler previousHandler =
+        Thread.getDefaultUncaughtExceptionHandler();
+    Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+      @Override
+      public void uncaughtException(Thread thread, Throwable ex) {
+        Achievements.unlock(
+            StethoGameApplication.this,
+            Achievements.Achievement.CRASH);
+
+        // Provide a more graceful experience allowing the user to notice the crash before
+        // we go boom...
+        try {
+          Thread.sleep(4000, 0 /* nanos */);
+        } catch (InterruptedException e) {
+        }
+        previousHandler.uncaughtException(thread, ex);
+      }
+    });
 
     // This blocks, *sigh*...
     Achievements.syncStateFromDisk(this);

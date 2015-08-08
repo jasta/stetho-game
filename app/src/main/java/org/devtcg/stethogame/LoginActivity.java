@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.games.Games;
-import com.google.android.gms.games.achievement.*;
 import com.google.android.gms.games.achievement.Achievements;
 import com.google.example.games.basegameutils.GameHelper;
 
@@ -35,6 +34,7 @@ public class LoginActivity extends AppCompatActivity
     if (StethoGameApplication.USE_GOOGLE_PLAY) {
       mGameHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
       mGameHelper.enableDebugLog(true);
+
       mGameHelper.setup(this);
       GoogleApiClientInstance.set(mGameHelper.getApiClient());
     } else {
