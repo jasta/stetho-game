@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
           ImageTypeQuestion.class,
           QuestionTopScore.class,
           QuestionNetworkPassword.class,
-          QuestionModifySetting.class
+          QuestionModifySetting.class,
+          QuestionLoginDumpapp.class
       };
 
   @Bind(R.id.pager) ViewPager mPager;
