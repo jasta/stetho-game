@@ -37,8 +37,11 @@
     <item name="android:layout_marginLeft">@dimen/question_padding_horizontal</item>
     <item name="android:layout_marginRight">@dimen/question_padding_horizontal</item>
     <item name="android:textColor">@android:color/black</item>
+    <item name="android:textColorHint">@android:color/darker_gray</item>
     <item name="android:padding">15dp</item>
     <item name="android:textSize">24sp</item>
+    <item name="android:imeOptions">actionDone</item>
+    <item name="android:singleLine">true</item>
   </style>
 
   <style name="AnswerButton">

@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
   @SuppressWarnings("unchecked")
   private static final Class<? extends Fragment>[] QUESTIONS_FRAGMENTS =
       new Class[] {
-          QuestionListView.class,
+          QuestionElementsStuff.class,
           QuestionImageType.class,
           QuestionTopScore.class,
           QuestionNetworkSecret.class,
@@ -136,10 +136,15 @@ public class MainActivity extends AppCompatActivity {
   };
 
   private void updateQuestionInfo(String displayName, boolean state) {
+    StringBuilder title = new StringBuilder();
+    title.append(
+        "Challenge " +
+            (mPager.getCurrentItem() + 1) + "/" +
+            mQuestionsAdapter.getCount());
     if (state) {
-      displayName = displayName + " ✓";
+      title.append(" ✓");
     }
-    setTitle(displayName);
+    setTitle(title);
   }
 
   private static class QuestionsAdapter extends FragmentStatePagerAdapter {

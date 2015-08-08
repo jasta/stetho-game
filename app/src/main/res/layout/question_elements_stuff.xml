@@ -5,16 +5,13 @@
     android:orientation="vertical"
     android:gravity="center">
 
-  <ListView
-      android:id="@+id/randomlist"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1"
-      />
-
   <TextView
-      android:text="What is the height of the 376th row?"
-      style="@style/QuestionPrompt.Small"
+      android:id="@+id/height_text"
+      android:text="Guess my height."
+      android:gravity="center"
+      style="@style/QuestionPrompt"
+      android:layout_height="0px"
+      android:layout_weight="1"
       android:layout_marginBottom="@dimen/question_padding_vertical"
       />
 
@@ -22,6 +19,7 @@
       android:id="@+id/answer_text"
       android:hint="Pixels"
       style="@style/QuestionAnswer"
+      android:inputType="number"
       android:layout_marginBottom="@dimen/question_padding_vertical"
       />
 

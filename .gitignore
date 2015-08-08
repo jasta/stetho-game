@@ -1,3 +1,4 @@
+*.apk
 .*.swp
 .gradle
 /local.properties
