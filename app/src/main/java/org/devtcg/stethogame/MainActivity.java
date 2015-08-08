@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
           QuestionListView.class,
           QuestionImageType.class,
           QuestionTopScore.class,
-          QuestionNetworkPassword.class,
+          QuestionNetworkSecret.class,
           QuestionModifySetting.class,
           QuestionPoke.class
       };

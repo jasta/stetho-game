@@ -20,11 +20,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class QuestionNetworkPassword extends Fragment implements QuestionInfoProvider {
+public class QuestionNetworkSecret extends Fragment implements QuestionInfoProvider {
   private static final QuestionInfo INFO =
       new QuestionInfo(
-          "Whats the password?",
-          Achievements.Achievement.QUESTION_NETWORK_PASSWORD);
+          "What's the secret?",
+          Achievements.Achievement.QUESTION_NETWORK_SECRET);
 
   @Bind(R.id.answer_text)
   EditText answerTextView;
@@ -60,7 +60,7 @@ public class QuestionNetworkPassword extends Fragment implements QuestionInfoPro
           public void run() {
             try {
               if (!theResponse.isSuccessful()) {
-                Toast.makeText(getActivity(), "Can't connect to server", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Unexpected server reply", Toast.LENGTH_SHORT).show();
               }
 
               if (theResponse.body().string().equalsIgnoreCase(answerTextView.getText().toString())) {
