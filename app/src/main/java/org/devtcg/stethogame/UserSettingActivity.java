@@ -1,12 +1,15 @@
 package org.devtcg.stethogame;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-/**
- * Created by apetrescu on 8/7/15.
- */
 public class UserSettingActivity extends PreferenceActivity {
+
+    public static void show(Activity context) {
+        context.startActivity(new Intent(context, UserSettingActivity.class));
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

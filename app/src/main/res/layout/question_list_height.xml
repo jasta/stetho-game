@@ -6,21 +6,28 @@
     android:gravity="center">
 
   <ListView
-        android:id="@+id/top_score_list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+      android:id="@+id/randomlist"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      />
 
   <TextView
-      android:text="Can you beat the top score?"
-      style="@style/QuestionPrompt"
+      android:text="What is the height of the 376th row?"
+      style="@style/QuestionPrompt.Small"
+      android:layout_marginBottom="@dimen/question_padding_vertical"
+      />
+
+  <EditText
+      android:id="@+id/answer_text"
+      android:hint="Pixels"
+      style="@style/QuestionAnswer"
       android:layout_marginBottom="@dimen/question_padding_vertical"
       />
 
   <Button
       android:id="@+id/answer_btn"
-      android:text="Refresh"
+      android:text="Submit"
       style="@style/AnswerButton"
       android:layout_marginBottom="@dimen/question_bottom_margin"
       />

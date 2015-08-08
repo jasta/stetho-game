@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
           QuestionTopScore.class,
           QuestionNetworkPassword.class,
           QuestionModifySetting.class,
-          QuestionLoginDumpapp.class
+          QuestionPoke.class
       };
 
   @Bind(R.id.pager) ViewPager mPager;
@@ -102,6 +101,9 @@ public class MainActivity extends AppCompatActivity {
                 GoogleApiClientInstance.get(this)),
             REQUEST_ACHIEVEMENTS);
         return true;
+      case R.id.action_settings:
+        UserSettingActivity.show(this);
+        return true;
       default:
         return super.onOptionsItemSelected(item);
     }
@@ -122,6 +124,10 @@ public class MainActivity extends AppCompatActivity {
       new ViewPager.SimpleOnPageChangeListener() {
     @Override
     public void onPageSelected(int position) {
+      Fragment fragment = mQuestionsAdapter.getItem(position);
+      if (fragment instanceof RevealListener) {
+        ((RevealListener)fragment).onRevealed();
+      }
       QuestionInfo info = mQuestionsAdapter.getQuestionInfo(position);
       updateQuestionInfo(
           info.displayName,
@@ -131,10 +137,9 @@ public class MainActivity extends AppCompatActivity {
 
   private void updateQuestionInfo(String displayName, boolean state) {
     if (state) {
-      displayName = "✓ " + displayName;
+      displayName = displayName + " ✓";
     }
     setTitle(displayName);
-    //mQuestionStatus.setText("unlocked=" + state);
   }
 
   private static class QuestionsAdapter extends FragmentStatePagerAdapter {

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="match_parent"
+      android:layout_height="0px"
+      android:layout_weight="1"
+      android:layout_marginLeft="@dimen/question_padding_horizontal"
+      android:layout_marginRight="@dimen/question_padding_horizontal"
+      />
+
+  <TextView
+      android:text="What is the format of this image?"
+      style="@style/QuestionPrompt.Small"
+      android:layout_marginBottom="@dimen/question_padding_vertical"
+      />
+
+  <EditText
+      android:id="@+id/answer_text"
+      android:hint="Image format type"
+      style="@style/QuestionAnswer"
+      android:layout_marginBottom="@dimen/question_padding_vertical"
+      />
+
+  <Button
+      android:id="@+id/answer_btn"
+      android:text="Submit"
+      style="@style/AnswerButton"
+      android:layout_marginBottom="@dimen/question_bottom_margin"
+      />
+
+</LinearLayout>

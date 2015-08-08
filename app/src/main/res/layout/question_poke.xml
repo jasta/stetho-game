@@ -6,14 +6,10 @@
     android:gravity="center">
 
   <TextView
-      android:text="Question 2 is much longer and drones on bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
+      android:id="@+id/poke_text"
+      android:text="Poke."
+      android:layout_marginBottom="@dimen/question_padding_vertical"
       style="@style/QuestionPrompt"
-      />
-
-  <Button
-      android:id="@+id/answer_btn"
-      android:text="You Win!"
-      style="@style/AnswerButton"
       />
 
 </LinearLayout>

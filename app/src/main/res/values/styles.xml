@@ -20,29 +20,33 @@
   <style name="QuestionPrompt" parent="@android:style/TextAppearance.Large">
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:paddingLeft">15dp</item>
-    <item name="android:paddingRight">15dp</item>
+    <item name="android:layout_marginLeft">@dimen/question_padding_horizontal</item>
+    <item name="android:layout_marginRight">@dimen/question_padding_horizontal</item>
     <item name="android:gravity">center_horizontal</item>
     <item name="android:textSize">36sp</item>
   </style>
 
-  <style name="SmallQuestionPrompt" parent="@android:style/TextAppearance.Medium">
+  <style name="QuestionPrompt.Small">
+    <item name="android:textSize">24sp</item>
+  </style>
+
+  <style name="QuestionAnswer" parent="@style/Widget.AppCompat.EditText">
+    <item name="android:background">@android:color/white</item>
     <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:paddingLeft">15dp</item>
-    <item name="android:paddingRight">15dp</item>
-    <item name="android:paddingTop">15dp</item>
-    <item name="android:paddingBottom">15dp</item>
-    <item name="android:gravity">center_horizontal</item>
-    <item name="android:textSize">20sp</item>
+    <item name="android:layout_height">@dimen/question_btn_height</item>
+    <item name="android:layout_marginLeft">@dimen/question_padding_horizontal</item>
+    <item name="android:layout_marginRight">@dimen/question_padding_horizontal</item>
+    <item name="android:textColor">@android:color/black</item>
+    <item name="android:padding">15dp</item>
+    <item name="android:textSize">24sp</item>
   </style>
 
   <style name="AnswerButton">
     <item name="android:background">@drawable/primary_btn_background</item>
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">@dimen/question_btn_height</item>
-    <item name="android:paddingLeft">25dp</item>
-    <item name="android:paddingRight">25dp</item>
+    <item name="android:layout_marginLeft">@dimen/question_padding_horizontal</item>
+    <item name="android:layout_marginRight">@dimen/question_padding_horizontal</item>
   </style>
 
 </resources>

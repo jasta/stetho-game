@@ -36,7 +36,7 @@ public class QuestionListView extends Fragment implements QuestionInfoProvider {
       LayoutInflater inflater,
       ViewGroup container,
       Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.question_3, container, false);
+    View view = inflater.inflate(R.layout.question_list_height, container, false);
     ButterKnife.bind(this, view);
 
     listView.setAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),

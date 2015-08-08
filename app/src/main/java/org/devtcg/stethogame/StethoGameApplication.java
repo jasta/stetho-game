@@ -10,15 +10,12 @@ import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class StethoGameApplication extends Application {
 
   public static final boolean USE_GOOGLE_PLAY = true;
 
   private static OkHttpClient client;
-
-  private static QuestionLoginDumpapp questionLoginDumpappFragment;
 
   static {
     client = new OkHttpClient();
@@ -27,14 +24,6 @@ public class StethoGameApplication extends Application {
 
   public static OkHttpClient getClient() {
     return client;
-  }
-
-  public static void registerLoginFragment(QuestionLoginDumpapp fragment) {
-    questionLoginDumpappFragment = fragment;
-  }
-
-  public static void loginToFragment(String yourName) {
-    questionLoginDumpappFragment.login(yourName);
   }
 
   @Override
@@ -85,7 +74,7 @@ public class StethoGameApplication extends Application {
         plugins.add(defaultPlugin);
       }
       plugins.add(new GoogleApiDumperPlugin(mContext));
-      plugins.add(new LoginDumperPlugin(mContext));
+      plugins.add(new PokeDumperPlugin());
       return plugins;
     }
   }

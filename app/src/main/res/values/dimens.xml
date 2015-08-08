@@ -3,7 +3,9 @@
   <dimen name="activity_horizontal_margin">16dp</dimen>
   <dimen name="activity_vertical_margin">16dp</dimen>
 
-  <dimen name="question_btn_height">80dp</dimen>
-
+  <dimen name="question_btn_height">60dp</dimen>
   <dimen name="question_btn_border_width">2dp</dimen>
+  <dimen name="question_padding_horizontal">55dp</dimen>
+  <dimen name="question_padding_vertical">25dp</dimen>
+  <dimen name="question_bottom_margin">70dp</dimen>
 </resources>

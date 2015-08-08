@@ -6,14 +6,8 @@
     android:gravity="center">
 
   <TextView
-      android:text="Modify the setting to win"
+      android:text="Simple, change the settings."
       style="@style/QuestionPrompt"
-      />
-
-  <Button
-      android:id="@+id/answer_btn"
-      android:text="Open Settings"
-      style="@style/AnswerButton"
       />
 
 </LinearLayout>
